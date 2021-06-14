@@ -4,7 +4,7 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 const GoalItem = props => {
     return (
-        <TouchableOpacity onPress={props.onDelete.bind(this, props.id)}>
+        <TouchableOpacity onPress={props.onDelete.bind(this, props.id, props.title)}>
             <View style={styles.listItem}>
                 <Text>{props.title}</Text>
             </View>

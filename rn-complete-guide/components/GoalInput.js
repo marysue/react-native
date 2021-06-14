@@ -32,12 +32,16 @@ const GoalInput = props => {
                 set a width on the style for the View to take up 60% of the available space.
                 Because the parent view takes up 80%, we set the buttons slightly less ... 60% */}
                  <View style={styles.buttonContainer}>
-                    <Button title="CANCEL" color='red' onPress={props.onCancel}/>
-                    <Button title="ADD"
-                        onPress={onAddGoal} />
+                     {/* Because you cannot set an inline style on Button (is that right?) we need to use
+                     a parent view to set the style, so we wrap each button in a view and style it. */}
+                     <View style={styles.button}>
+                        <Button title="CANCEL" color='red' onPress={props.onCancel}/>
+                     </View>
+                    <View style={styles.button}>
+                        <Button title="ADD"
+                            onPress={onAddGoal} />
+                    </View>
                 </View>
-
-
             </View>
         </Modal>
     );
@@ -62,6 +66,9 @@ const styles = StyleSheet.create( {
           flexDirection: 'row',
           justifyContent: 'space-around',
           width: '80%'
+      },
+      button: {
+          width: '40%'
       }
 
 })

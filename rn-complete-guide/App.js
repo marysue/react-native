@@ -9,7 +9,7 @@ export default function App() {
   const [isAddMode, setIsAddMode] = useState(false);
 
   const addGoalHandler = (goalTitle) => {
-    console.log(goalTitle);
+    console.log("Adding:  ", goalTitle);
     //setCourseGoals([...courseGoals, enteredGoal]);
     //To avoid latency issues, use anonymous function to spread courseGoals ...
     setCourseGoals(currentGoals => [
@@ -19,7 +19,8 @@ export default function App() {
     setIsAddMode(false);
   }
 
-  const removeGoalHandler = (goalId) => {
+  const removeGoalHandler = (goalId, goalTitle) => {
+    console.log("Removing goal:  ", goalTitle);
     setCourseGoals(currentGoals => {
       return currentGoals.filter((goal) => goal.id !== goalId)
     });
@@ -54,6 +55,8 @@ export default function App() {
           //the keyExtractor.
           keyExtractor={(item, index) => item.id}
           data={courseGoals}
+          // setting data to courseGoals will then map through all of the list of objects and
+          // render each one -- rather than using courseGoals.map
           renderItem={ itemData => (
             <GoalItem title={itemData.item.value} id={itemData.item.id} onDelete={removeGoalHandler}/>
           )
