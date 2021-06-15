@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Ale
 import Card from '../components/Card';
 import Colors from '../constants/colors';
 import Input from '../components/Input';
+import NumberContainer from '../components/NumberContainer';
 
 const StartGameScreen = props => {
     const [enteredValue, setEnteredValue] = useState('');
@@ -35,13 +36,20 @@ const StartGameScreen = props => {
         setConfirmed(true);
         setSelectedNumber(chosenNumber);
         setEnteredValue('');
+        Keyboard.dismiss();
 
     }
 
     let confirmedOutput;
 
     if (confirmed) {
-        confirmedOutput = <Text>Chosen Number: {selectedNumber}</Text>
+        confirmedOutput = (
+            <Card style={styles.summaryContainer}>
+                <Text>You selected:</Text>
+                    <NumberContainer>{selectedNumber}</NumberContainer>
+                    <Button title="START GAME" onPress={() => props.onStartGame(selectedNumber)}></Button>
+            </Card>
+        )
     }
     //TouchableWithoutFeedback closes the keyboard if you touch somewhere else on the screen
     //It detects that you touched outside of the keyboard, and will dismiss the keyboard.
@@ -111,6 +119,10 @@ const styles = StyleSheet.create ({
         width: 50,
         textAlign: 'center',
         color: 'black'
+    },
+    summaryContainer: {
+        marginTop: 20,
+        alignItems: 'center'
     }
 
 });
