@@ -12,7 +12,6 @@ const generateRandomBetween = (min, max, exclude) => {
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
 
     if (rndNum === exclude) {
-        console.log("generateRandomBetween:  calling recursively with min: ", min, " max: ", max, " exclude: ", exclude);
         return generateRandomBetween(min, max, exclude);
     } else {
         return rndNum;
@@ -31,8 +30,6 @@ const GameScreen = props => {
     //After the component has been rendered, the useEffect function will run.  Not before, not simultaneously ... after!
     useEffect(() => {
         if (currentGuess === userChoice) {
-           console.log("currentGuess: ", currentGuess, " UserChoice:  ", userChoice);
-           console.log("calling onGameOver with the number of rounds: ", rounds);
            onGameOver(rounds);
            //Alert.alert('Game over!', `You guessed this in ${rounds} rounds ...`, [{text: 'Congratulations!', style: 'cancel'}])
         }
@@ -42,9 +39,6 @@ const GameScreen = props => {
 
 
     const nextGuessHandler = direction => {
-        console.log("nextGuessHandler - CurrentHigh: ", currentHigh.current);
-        console.log("nextGuessHandler - CurrentLow: ", currentLow.current);
-
         if (direction === 'lower' && currentGuess < props.userChoice) {
             Alert.alert('Don\'t lie!', 'You know that this is wrong...', [{text: 'Sorry!', style: 'cancel'}])
         }
