@@ -4,14 +4,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Alert,  } from 'react-native';
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
+import DefaultStyles from '../constants/DefaultStyles';
 
 const generateRandomBetween = (min, max, exclude) => {
+    console.log("generateRandomBetween ...");
     min = Math.ceil(min);
     max = Math.floor(max);
 
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
 
     if (rndNum === exclude) {
+        console.log("GameScreen: rndNum: ", rndNum, " ===  exclude: ", exclude);
         return generateRandomBetween(min, max, exclude);
     } else {
         return rndNum;
@@ -63,7 +66,7 @@ const GameScreen = props => {
 
     return (
         <View style={styles.screen}>
-            <Text>Opponent's Guess</Text>
+            <Text style={DefaultStyles.title}>Opponent's Guess</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.buttonContainer}>
                 <Button title="LOWER" onPress={nextGuessHandler.bind(this, 'lower')}/>

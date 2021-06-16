@@ -1,9 +1,19 @@
 import React, { useState }from 'react';
-import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    Button,
+    TouchableWithoutFeedback,
+    Keyboard,
+    Alert
+} from 'react-native';
 import Card from '../components/Card';
-import Colors from '../constants/colors';
 import Input from '../components/Input';
+import Colors from '../constants/colors';
 import NumberContainer from '../components/NumberContainer';
+import BodyText from '../components/BodyText';
+import TitleText from '../components/TitleText';
 
 const StartGameScreen = props => {
     const [enteredValue, setEnteredValue] = useState('');
@@ -23,6 +33,7 @@ const StartGameScreen = props => {
         setEnteredValue('');
         setConfirmed(false);
     }
+
 
     //You can actually change the value of setEnteredValue('') because it will only be changed
     //the next time the component is rerendered!
@@ -55,11 +66,17 @@ const StartGameScreen = props => {
     //It detects that you touched outside of the keyboard, and will dismiss the keyboard.
     //You need the Keyboard component from React to use this function.
     return (
-        <TouchableWithoutFeedback onPress={ Keyboard.dismiss()}>
+        <TouchableWithoutFeedback
+        // if you pass onPress {Keyboard.dismiss()} it
+        // will dismiss the keyboard after each keypress.
+        //But if you pass an anonymous function, it dismisses
+        //after you press confirm or reset or click outside the
+        //key input/keyboard areas
+        onPress={ () => { Keyboard.dismiss()}}>
         <View style={styles.screen}>
-            <Text style={styles.title}>Start a New Game!</Text>
+            <TitleText style={styles.title}>Start a New Game!</TitleText>
             <Card style={styles.inputContainer}>
-                <Text>Select a Number</Text>
+                <BodyText>Select a Number</BodyText>
                 {/* on iOS blurOnSubmit does not work - only on android */}
                 {/* also, keyboardType='numeric' will allow you to enter a decimal value; use number-pad for iOS */}
                 {/* for android you need to do something different because it still allows you to type a decimal */}
@@ -97,6 +114,7 @@ const styles = StyleSheet.create ({
         alignItems: 'center',
         justifyContent: 'flex-start'
     },
+    // Expo doesn't support fontWeight: bold;   to do this you must use fontFamily: 'open-sans-bold';
     title: {
         fontSize: 20,
         marginVertical: 10, //spacing on the vertical axis
