@@ -1,16 +1,16 @@
 import React, { useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Header from './components/Header';
-import StartGameScreen from './screens/StartGameScreen';
-import GameScreen from './screens/GameScreen';
-import GameOverScreen from './screens/GameOverScreen';
-
-
+import { StyleSheet, View } from 'react-native';
 //to load fonts when app starts
 //expo-font should be included by default, but run expo install expo-font to be sure
 import * as Font from 'expo-font';
 //import { AppLoading } from 'expo';
 import AppLoading from 'expo-app-loading';
+
+import Header from './components/Header';
+import StartGameScreen from './screens/StartGameScreen';
+import GameScreen from './screens/GameScreen';
+import GameOverScreen from './screens/GameOverScreen';
+
 
 //fetchFonts returns a promise
 const fetchFonts = async() => {
@@ -25,8 +25,6 @@ const fetchFonts = async() => {
 //   npm install may install the wrong version and break the app.
 //then import it as follows:
 //  import AppLoading from 'expo-app-loading';
-
-
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();

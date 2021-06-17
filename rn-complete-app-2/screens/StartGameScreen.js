@@ -14,6 +14,7 @@ import Colors from '../constants/colors';
 import NumberContainer from '../components/NumberContainer';
 import BodyText from '../components/BodyText';
 import TitleText from '../components/TitleText';
+import MainButton from '../components/MainButton';
 
 const StartGameScreen = props => {
     const [enteredValue, setEnteredValue] = useState('');
@@ -52,13 +53,16 @@ const StartGameScreen = props => {
     }
 
     let confirmedOutput;
-
+//In a normal Button, we pass title as a prop - props.title, but here the way we've
+//defined MainButton we're passing the title between the opening and closing tags
+//of MainButton -- so we move "START GAME" there...
     if (confirmed) {
         confirmedOutput = (
             <Card style={styles.summaryContainer}>
                 <Text>You selected:</Text>
                     <NumberContainer>{selectedNumber}</NumberContainer>
-                    <Button title="START GAME" onPress={() => props.onStartGame(selectedNumber)}></Button>
+                    {/* <Button title="START GAME" onPress={() => props.onStartGame(selectedNumber)}></Button> */}
+                    <MainButton onPress={() => props.onStartGame(selectedNumber)}>START GAME</MainButton>
             </Card>
         )
     }
