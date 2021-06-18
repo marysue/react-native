@@ -6,7 +6,8 @@ import {
     Button,
     TouchableWithoutFeedback,
     Keyboard,
-    Alert
+    Alert,
+    Dimensions
 } from 'react-native';
 import Card from '../components/Card';
 import Input from '../components/Input';
@@ -69,6 +70,14 @@ const StartGameScreen = props => {
     //TouchableWithoutFeedback closes the keyboard if you touch somewhere else on the screen
     //It detects that you touched outside of the keyboard, and will dismiss the keyboard.
     //You need the Keyboard component from React to use this function.
+
+    // Can also use Dimensions in a normal javascript statement
+    //if (Dimensions.get('window').height > 600) { do something } else { do something else }
+    //... or
+    // let listContainerStyle = styles.listContainer;
+    // if (Dimensions.get('window').width < 350) {
+    //         listContainerStyle = styles.listContainerBig;
+    // }
     return (
         <TouchableWithoutFeedback
         // if you pass onPress {Keyboard.dismiss()} it
@@ -94,6 +103,9 @@ const StartGameScreen = props => {
                     value={enteredValue}
                 >
                 </Input>
+                {/* Can also use Dimensions inline like follows:
+                <View style={Dimensions.get('window').height > 600 ? styles.buttonContainer : styles.buttonContainerSmall} */}
+
                 <View style={styles.buttonContainer}>
                     {/* can't style the individual buttons but you can surround it by a view and style the view for each button */}
                     <View style={styles.buttons}><Button title="Reset" color={Colors.accent} onPress={resetInputHandler}></Button></View>
@@ -130,9 +142,11 @@ const styles = StyleSheet.create ({
     },
     buttonContainer: {
         flexDirection: 'row',
-        width: '100%',  //need 100% because otherwise it would set the width only as wide as the 2 buttons; we want it the size of the parent container
         justifyContent: 'space-between', //the main axis is left to right with a row
-        paddingHorizontal: 15 //so the buttons don't sit right on the left and right margins
+        marginTop: Dimensions.get('window').height > 600 ? 20 : 5,
+        width: '100%',  //need 100% because otherwise it would set the width only as wide as the 2 buttons; we want it the size of the parent container
+        maxWidth: '90%',
+        paddingHorizontal: 15, //so the buttons don't sit right on the left and right margins
     },
     buttons: {
         width: '40%',

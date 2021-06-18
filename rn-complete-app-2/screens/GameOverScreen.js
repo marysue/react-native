@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 import BodyText from '../components/BodyText';
 import TitleText from '../components/TitleText';
 import MainButton from '../components/MainButton';
@@ -60,9 +60,13 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     imageContainer: {
-        width: 300,
-        height: 300,
-        borderRadius: 150,
+        // width: 300,
+        // height: 300,
+        // borderRadius: 150,
+        // Dynamically calculated:
+        width: Dimensions.get('window').width * 0.7, //and because it's supposed to be a square, height should be calc the same
+        height: Dimensions.get('window').width * 0.7,
+        borderRadius: Dimensions.get('window').width * 0.7 / 2,  
         borderWidth: 3,
         borderColor: 'black',
         overflow: 'hidden', //so that any part of the image that goes beyond the boundaries is clipped.
